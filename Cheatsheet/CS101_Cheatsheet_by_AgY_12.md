@@ -568,7 +568,8 @@ print(NP([4,2,6,3]))
 ### 3-8 二分查找
 
 * 二分查找的边界条件是一个令人头疼的问题,这已经得到了官方认证(如图).
-  ![截屏2024-12-21 20.57.22.png](../../../Pictures/%E6%88%AA%E5%B1%8F/%E6%88%AA%E5%B1%8F2024-12-21%2020.57.22.png)
+<img width="635" alt="截屏2024-12-21 20 57 22" src="https://github.com/user-attachments/assets/81d8b2a0-42e1-40a0-a30f-03b69a98030b" />
+
 * 一般的bisect_left代码如下.这种二分对升序列表进行查找,找到的返回值lo左边的所有数都比x小,lo本身及其右边都不比x小.
 
 ```python
@@ -613,7 +614,8 @@ def bisect_left(a, x, lo=0, hi=None, *, key=None):
 * 遍历序列,对于第i项,找到它可以被作为长度为几的上升子序列的末尾,然后更新这个末尾.这就是二分查找找的东西.
 * 最后,dp有多少项填了数,LIS长度就是多少
 * 如图
-  ![B94052668CE0A50777C71755EB94E9D7.png](../../../Downloads/B94052668CE0A50777C71755EB94E9D7.png)
+![B94052668CE0A50777C71755EB94E9D7](https://github.com/user-attachments/assets/e9dbb91d-ccd9-47f2-beb6-562e055f0018)
+
 
 ```python
 import bisect
@@ -629,7 +631,8 @@ def lis(a):
 
 * 给定一个序列v,其中有正数有负数有0,求其中和最大的子串(即:这个序列里连续的一些数,使之和最大).
 * 基本思想是: 土豪购物,但不放回.(这是2024大雪的月考题...题目的一部分是:土豪看到一串商品,它们的价值有正有负有0,土豪要买连续的一些商品,使买到的商品价值总和最大)如下图(第二行的l[i]应是v[i])
-  ![截屏2024-12-21 17.17.16.png](../../../Pictures/%E6%88%AA%E5%B1%8F/%E6%88%AA%E5%B1%8F2024-12-21%2017.17.16.png)
+<img width="703" alt="截屏2024-12-21 17 17 16" src="https://github.com/user-attachments/assets/ad8fdbfa-d690-4b8a-a03d-ec68c4de3fdc" />
+
 * 即:`max_cur=max(max_cur+v[i],v[i])`.如果`max_cur`(已经买到的商品总价值)已经为负,就把它们全扔了重买第i个.否则不扔,并买第i个.
 * 每次买之后都要更新一下商品的最大总价值(max_all).
 
@@ -652,7 +655,8 @@ def kadane(v):#卡丹算法求最大子序列
   * 求切片的和时可以用前缀和:
     1. 构建一个前缀和矩阵qzh,每一行的第i个元素是这一行第0~i元素的和
     2. 某一行l~r列的元素的元素和就是qzh[r]-qzh[l-1].前缀和矩阵需要在左边加一列0做保护层
-       ![0986D1FBEEEA56A59376170679E6FE84.png](../../../Downloads/0986D1FBEEEA56A59376170679E6FE84.png)
+![0986D1FBEEEA56A59376170679E6FE84](https://github.com/user-attachments/assets/9a64992d-4db1-4138-8925-d80f0180f5ae)
+
 
 ```python
 def qzh(mat,n,m):#前缀和
