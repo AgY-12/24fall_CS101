@@ -1,6 +1,6 @@
 # CS101 Cheatsheet
 
-2024.12.21, Compiled by <mark>AgY_12, CCME</mark>
+2025.1.5, Compiled by <mark>AgY_12, CCME</mark>
 
 ##### 说明:该Cheatsheet省略了大量基础语法(包括基本的处理输入的方法),不适合刚接触CS食用
 
@@ -358,8 +358,10 @@ def dfs(x,y):
 * 直接在矩阵里bfs了
 * 同样,我们需要用bfs来遍历一个矩阵湖中的某片连通水域,1表示水,0表示地.步骤如下:
   1. 先在主函数里遍历矩阵湖,找到一个是水的点.
-  2. 建立集合v,存储已经走过的点,防止重走.
-  3. 建立
+  2. 建立双端队列q(一个可以从两端弹出的列表类似物),用来存储将要走的点.当然,q里面一开始得加一个初始位置,从这个点开始走.
+  3. 建立集合v,存储已经走过的点,防止重走.
+  4. 每次从q中弹出一个,走到这个点(`x,y=q.popleft()`),(x和y代表当前的位置),并在v中添加这个点以标记"这个点被走过".
+  5. 从这个点开始探路,`for dx,dy in d...`,对于它旁边的每个点,如果满足入q条件(坐标在矩阵范围内,是水,没走过),就入q.
 
 ```python
 from collections import deque
@@ -372,7 +374,7 @@ def bfs(x0,y0,mat):
         v.add((x,y))
         for dx,dy in d:#从当前位置开始探路
             nx,ny=x+dx,y+dy
-            if 0<=nx<len(mat) and 0<=ny<len(mat[0]) and mat[nx][ny]==1:
+            if 0<=nx<len(mat) and 0<=ny<len(mat[0]) and mat[nx][ny]==1 and (x,y) not in v:
                 q.append((nx,ny))
 ```
 
@@ -566,9 +568,7 @@ print(NP([4,2,6,3]))
 ### 3-8 二分查找
 
 * 二分查找的边界条件是一个令人头疼的问题,这已经得到了官方认证(如图).
-<img width="635" alt="截屏2024-12-21 20 57 22" src="https://github.com/user-attachments/assets/4898fa6b-0efb-400d-9ff8-e5138e6a5c8f" />
-
-
+  ![截屏2024-12-21 20.57.22.png](../../../Pictures/%E6%88%AA%E5%B1%8F/%E6%88%AA%E5%B1%8F2024-12-21%2020.57.22.png)
 * 一般的bisect_left代码如下.这种二分对升序列表进行查找,找到的返回值lo左边的所有数都比x小,lo本身及其右边都不比x小.
 
 ```python
